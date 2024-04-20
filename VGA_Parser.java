@@ -29,12 +29,17 @@ public class VGA_Parser {
     public static Float[][][] parseVGA(String[] input) {
         ArrayList<Float> valueList = new ArrayList<Float>();
         for (String line : input) {
+            // System.out.println("Unparsed: " + line);
             String noBrackets = line.replaceAll("[\\[\\](){}]", "");
             String cleanedLine = noBrackets.replaceAll("\\s", "");
+            // System.out.println("Cleaned: " + cleanedLine);
             String[] splitLine = cleanedLine.split(",");
             for (String value : splitLine) {
                 valueList.add(Float.parseFloat(value));
             }
+            // System.out.println("Parsed: " + valueList.get(valueList.size() - 3) + ", "
+            // + valueList.get(valueList.size() - 2) + ", " + valueList.get(valueList.size()
+            // - 1));
         }
         Float[][][] returnValues = new Float[536][70][3];
         for (int i = 0; i < 536; i++) {
@@ -53,6 +58,8 @@ public class VGA_Parser {
         for (int i = 0; i < 536; i++) {
             for (int j = 0; j < 70; j++) {
                 Color vgaColor = new Color(inputMatrix[i][j][0], inputMatrix[i][j][1], inputMatrix[i][j][2]);
+                // System.out.println(inputMatrix[i][j][0] + ", " + inputMatrix[i][j][1] + ", "
+                // + inputMatrix[i][j][2]);
                 image.setRGB(i, j, vgaColor.getRGB());
             }
         }
