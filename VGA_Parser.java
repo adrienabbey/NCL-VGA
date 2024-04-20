@@ -44,6 +44,24 @@ public class VGA_Parser {
                 }
             }
         }
+        int x = 0;
+        int y = 0;
+        int c = 0;
+        for (Float f : valueList) {
+            returnValues[x][y][c] = f;
+            y++;
+            c++;
+            if (y >= 70) {
+                x++;
+                y = 0;
+            }
+            if (x >= 536) {
+                x = 0;
+            }
+            if (c >= 3) {
+                c = 0;
+            }
+        }
         return returnValues;
     }
 
