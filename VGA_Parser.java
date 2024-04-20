@@ -7,8 +7,8 @@ public class VGA_Parser {
     public static void main(String[] args) throws FileNotFoundException {
         String fileContents = loadFile();
         String[] splitFile = fileContents.split("[)],");
-        double[][][] vga_matrix;
-        parseVGA(splitFile);
+        Double[][][] vga_matrix = parseVGA(splitFile);
+        System.out.println(vga_matrix);
     }
 
     public static String loadFile() throws FileNotFoundException {
@@ -27,12 +27,19 @@ public class VGA_Parser {
         for (String line : input) {
             String noBrackets = line.replaceAll("[\\[\\](){}]", "");
             String cleanedLine = noBrackets.replaceAll("\\s", "");
-            // System.out.println(cleanedLine);
             String[] splitLine = cleanedLine.split(",");
             for (String value : splitLine) {
                 valueList.add(Double.parseDouble(value));
             }
         }
-        // System.out.println(valueList.size());
+        Double[][][] returnValues = new Double[536][70][3];
+        for (int i = 0; i < 536; i++) {
+            for (int j = 0; j < 70; j++) {
+                for (int k = 0; k < 3; k++) {
+                    returnValues[i][j][k] = valueList.get(i * j + k);
+                }
+            }
+        }
+        return returnValues;
     }
 }
